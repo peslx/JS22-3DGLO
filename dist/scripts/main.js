@@ -1,1 +1,1 @@
-(()=>{"use strict";console.log("'one.js' подключен")})();
+(()=>{"use strict";console.log("'heroTimer.js' подключен")})();

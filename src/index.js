@@ -1,3 +1,3 @@
-import moduleOne from "./modules/one";
+import heroTimer from "./modules/heroTimer";
 
-moduleOne();
+heroTimer();
