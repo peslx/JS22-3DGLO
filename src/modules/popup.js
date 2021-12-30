@@ -1,5 +1,5 @@
 const popup = () => {
-  console.log("Скрипт всплывашки");
+  console.log("'popup.js' подключен");
 };
 
 export default popup;
