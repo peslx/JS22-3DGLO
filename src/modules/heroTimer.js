@@ -48,7 +48,7 @@ const heroTimer = (deadline) => {
     // timerMinutes.style.display = "none";
     // timerSeconds.style.display = "none";
   };
-
+  refreshTime();
   let timerID = setInterval(refreshTime, 1000);
 };
 
