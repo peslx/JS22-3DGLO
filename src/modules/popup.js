@@ -3,16 +3,41 @@ const popup = () => {
   const popup = document.querySelector(".popup");
   const triggers = document.querySelectorAll(".popup-btn");
   const closeBtn = popup.querySelector(".popup-close");
+  const popupForm = popup.querySelector("form");
+
+  let a;
+  let val = 0;
 
   triggers.forEach((trigger) => {
     trigger.addEventListener("click", () => {
-      popup.style.display = "block";
+      openPopup();
     });
   });
 
   closeBtn.addEventListener("click", () => {
     popup.style.display = "none";
+    hidePopup();
   });
+
+  const hidePopup = () => {
+    popupForm.style.opacity = "";
+    popupForm.style.transform = "";
+    val = 0;
+  };
+
+  const showPopup = () => {
+    val += 0.05;
+    popupForm.style.opacity = val;
+    popupForm.style.transform = `scale(${val})`;
+    if (val < 1) a = requestAnimationFrame(showPopup);
+    if (val == 1) cancelAnimationFrame(a);
+  };
+
+  const openPopup = () => {
+    popup.style.display = "block";
+    hidePopup();
+    showPopup();
+  };
 };
 
 export default popup;
