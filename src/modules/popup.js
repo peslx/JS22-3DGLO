@@ -43,10 +43,6 @@ const popup = () => {
     hidePopup();
     showPopup();
   };
-  window.addEventListener("resize", () => {
-    console.dir(document);
-    console.log(document.documentElement.clientWidth);
-  });
 };
 
 export default popup;
