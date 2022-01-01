@@ -5,7 +5,7 @@ const menu = () => {
   const menu = document.querySelector("menu");
   const closeBtn = menu.querySelector(".close-btn");
   const menuItems = menu.querySelectorAll("ul>li>a");
-  const links = document.querySelectorAll('a[href^="#"]');
+  const scrollBtn = document.querySelector("a[href='#service-block']");
 
   const handleMenu = () => {
     menu.classList.toggle("active-menu");
@@ -16,20 +16,23 @@ const menu = () => {
     menuItem.addEventListener("click", handleMenu)
   );
 
-  links.forEach((link) => {
+  menuItems.forEach((link) => {
     if (link.attributes["href"].value.length > 1) {
-      // console.log(link);
       link.addEventListener("click", (e) => {
         e.preventDefault();
-        // console.log(
-        //   document.querySelector(link.attributes["href"].value).offsetTop
-        // );
         window.scrollBy({
           top: document.querySelector(link.attributes["href"].value).offsetTop,
           behavior: "smooth",
         });
       });
     }
+  });
+  scrollBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    window.scrollBy({
+      top: document.querySelector("#service-block").offsetTop,
+      behavior: "smooth",
+    });
   });
 };
 
