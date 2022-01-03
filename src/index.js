@@ -10,4 +10,4 @@ menu();
 popup();
 validation();
 tabs();
-slider();
+slider(true); // true - добавляет 'dots'
