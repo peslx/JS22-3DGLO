@@ -2,7 +2,6 @@ const popup = () => {
   console.log("'popup.js' подключен");
   const popup = document.querySelector(".popup");
   const triggers = document.querySelectorAll(".popup-btn");
-  const closeBtn = popup.querySelector(".popup-close");
   const popupForm = popup.querySelector("form");
 
   let a;
@@ -14,9 +13,14 @@ const popup = () => {
     });
   });
 
-  closeBtn.addEventListener("click", () => {
-    popup.style.display = "none";
-    hidePopup();
+  popup.addEventListener("click", (e) => {
+    if (
+      !e.target.closest(".popup-content") ||
+      e.target.classList.contains("popup-close")
+    ) {
+      popup.style.display = "none";
+      hidePopup();
+    }
   });
 
   const hidePopup = () => {
