@@ -7,6 +7,25 @@ const calc = (price = 100) => {
   const calcDay = document.querySelector(".calc-day");
   const calcTotal = document.getElementById("total");
 
+  let calcTotalValue = 0;
+  let dur = 139;
+  let total = 0;
+  let a;
+
+  const animateCalc = () => {
+    total += dur;
+
+    console.log(total);
+
+    a = requestAnimationFrame(animateCalc);
+    calcTotal.textContent = total;
+    if (total >= calcTotalValue) {
+      total = calcTotalValue;
+      calcTotal.textContent = total;
+      cancelAnimationFrame(a);
+    }
+  };
+
   const runCalc = () => {
     const calcTypeValue = +calcType.options[calcType.selectedIndex].value;
     const calcSquareValue = +calcSquare.value;
@@ -28,14 +47,14 @@ const calc = (price = 100) => {
     }
 
     if (calcTypeValue && calcSquareValue) {
-      const calcTotalValue =
+      calcTotalValue =
         price * calcTypeValue * calcSquareValue * calcCountValue * calcDayValue;
 
       console.log(
         `${price} * ${calcTypeValue} * ${calcSquareValue} * ${calcCountValue} * ${calcDayValue} = ${calcTotalValue}`
       );
 
-      calcTotal.textContent = calcTotalValue;
+      animateCalc();
     }
 
     //
