@@ -85,7 +85,7 @@ const validation = () => {
 
   calcInputs.forEach((i) => {
     i.addEventListener("input", () => {
-      i.value = validate.words.lat(i.value);
+      i.value = validate.digits(i.value);
     });
     i.addEventListener("blur", () => {
       validate.onBlur(i);
