@@ -1,3 +1,5 @@
+import { help } from "./helpers";
+
 const popup = () => {
   console.log("'popup.js' подключен");
   const popup = document.querySelector(".popup");
@@ -47,6 +49,8 @@ const popup = () => {
     hidePopup();
     showPopup();
   };
+
+  help("'popup.js'");
 };
 
 export default popup;

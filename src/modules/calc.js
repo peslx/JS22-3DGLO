@@ -1,3 +1,5 @@
+import { help } from "./helpers";
+
 const calc = (price = 100) => {
   console.log("'calc.js' подключен");
   const calc = document.querySelector(".calc-block");
@@ -15,7 +17,7 @@ const calc = (price = 100) => {
   const animateCalc = () => {
     total += dur;
 
-    console.log(total);
+    // console.log(total);
 
     a = requestAnimationFrame(animateCalc);
     calcTotal.textContent = total;
@@ -50,9 +52,9 @@ const calc = (price = 100) => {
       calcTotalValue =
         price * calcTypeValue * calcSquareValue * calcCountValue * calcDayValue;
 
-      console.log(
-        `${price} * ${calcTypeValue} * ${calcSquareValue} * ${calcCountValue} * ${calcDayValue} = ${calcTotalValue}`
-      );
+      // console.log(
+      //   `${price} * ${calcTypeValue} * ${calcSquareValue} * ${calcCountValue} * ${calcDayValue} = ${calcTotalValue}`
+      // );
 
       animateCalc();
     }
@@ -63,6 +65,8 @@ const calc = (price = 100) => {
   calc.addEventListener("input", (e) => {
     runCalc();
   });
+
+  help("'calc.js'");
 };
 
 export default calc;
