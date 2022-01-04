@@ -1,4 +1,4 @@
-import { help } from "./helpers";
+import { help, animate } from "./helpers";
 
 const calc = (price = 100) => {
   console.log("'calc.js' подключен");
@@ -10,23 +10,6 @@ const calc = (price = 100) => {
   const calcTotal = document.getElementById("total");
 
   let calcTotalValue = 0;
-  let dur = 139;
-  let total = 0;
-  let a;
-
-  const animateCalc = () => {
-    total += dur;
-
-    // console.log(total);
-
-    a = requestAnimationFrame(animateCalc);
-    calcTotal.textContent = total;
-    if (total >= calcTotalValue) {
-      total = calcTotalValue;
-      calcTotal.textContent = total;
-      cancelAnimationFrame(a);
-    }
-  };
 
   const runCalc = () => {
     const calcTypeValue = +calcType.options[calcType.selectedIndex].value;
@@ -52,14 +35,16 @@ const calc = (price = 100) => {
       calcTotalValue =
         price * calcTypeValue * calcSquareValue * calcCountValue * calcDayValue;
 
-      // console.log(
-      //   `${price} * ${calcTypeValue} * ${calcSquareValue} * ${calcCountValue} * ${calcDayValue} = ${calcTotalValue}`
-      // );
-
-      animateCalc();
+      animate({
+        duration: 750,
+        timing(timeFraction) {
+          return timeFraction;
+        },
+        draw(progress) {
+          calcTotal.textContent = Math.ceil(calcTotalValue * progress);
+        },
+      });
     }
-
-    //
   };
 
   calc.addEventListener("input", (e) => {

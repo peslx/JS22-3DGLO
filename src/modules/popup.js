@@ -1,13 +1,10 @@
-import { help } from "./helpers";
+import { help, animate } from "./helpers";
 
 const popup = () => {
   console.log("'popup.js' подключен");
   const popup = document.querySelector(".popup");
   const triggers = document.querySelectorAll(".popup-btn");
   const popupForm = popup.querySelector("form");
-
-  let a;
-  let val = 0;
 
   triggers.forEach((trigger) => {
     trigger.addEventListener("click", () => {
@@ -28,7 +25,6 @@ const popup = () => {
   const hidePopup = () => {
     popupForm.style.opacity = "";
     popupForm.style.transform = "";
-    val = 0;
   };
 
   const showPopup = () => {
@@ -36,11 +32,16 @@ const popup = () => {
       popupForm.style.opacity = 1;
       popupForm.style.transform = `scale(1)`;
     } else {
-      val += 0.05;
-      popupForm.style.opacity = val;
-      popupForm.style.transform = `scale(${val})`;
-      if (val < 1) a = requestAnimationFrame(showPopup);
-      if (val == 1) cancelAnimationFrame(a);
+      animate({
+        duration: 600,
+        timing(timeFraction) {
+          return timeFraction;
+        },
+        draw(progress) {
+          popupForm.style.opacity = progress;
+          popupForm.style.transform = `scale(${progress})`;
+        },
+      });
     }
   };
 
