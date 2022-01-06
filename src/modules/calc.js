@@ -31,7 +31,7 @@ const calc = (price = 100) => {
       calcDayValue = 1;
     }
 
-    if (calcTypeValue && calcSquareValue) {
+    if (calcTypeValue && calcSquareValue !== 0) {
       calcTotalValue =
         price * calcTypeValue * calcSquareValue * calcCountValue * calcDayValue;
 
@@ -44,10 +44,12 @@ const calc = (price = 100) => {
           calcTotal.textContent = Math.ceil(calcTotalValue * progress);
         },
       });
+    } else if (calcSquareValue === 0 || !calcTypeValue) {
+      calcTotal.textContent = 0;
     }
   };
 
-  calc.addEventListener("input", (e) => {
+  calc.addEventListener("change", (e) => {
     runCalc();
   });
 
