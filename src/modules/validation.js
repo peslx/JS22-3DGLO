@@ -24,7 +24,7 @@ const validation = () => {
     },
     digits: (str) => str.replace(/\D/g, ""),
     mail: (str) => str.replace(/[^a-zA-Z0-9\-@_.~!'*]/g, ""),
-    phone: (str) => str.replace(/[^\d\(\)\-]/g, ""),
+    phone: (str) => str.replace(/[^\d\(\)\+\-]/g, ""),
     input: (i) => {
       if (i.type == "text" || i.placeholder == "Ваше сообщение") {
         i.value = validate.words.cyr(i.value);

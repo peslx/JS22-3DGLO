@@ -7,11 +7,19 @@ import slider from "./modules/slider";
 import calc from "./modules/calc";
 import sendForm from "./modules/sendForm";
 
-heroTimer("10 january 2022 13:00");
+heroTimer("14 january 2022 13:00");
 menu();
 popup();
 validation();
 tabs();
 slider(true); // true - добавляет 'dots'
 calc();
-sendForm(1);
+sendForm({
+  formID: "form1",
+  extraData: [
+    {
+      type: "block",
+      id: "total",
+    },
+  ],
+});
