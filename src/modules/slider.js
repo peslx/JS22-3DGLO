@@ -1,5 +1,5 @@
 const slider = (requireDots = false) => {
-  console.log("'slider.js' подключен");
+  // console.log("'slider.js' подключен");
 
   const slider = document.querySelector(".portfolio-content");
   const slides = document.querySelectorAll(".portfolio-item");

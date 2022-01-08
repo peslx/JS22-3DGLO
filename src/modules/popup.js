@@ -1,7 +1,7 @@
 import { help, animate } from "./helpers";
 
 const popup = () => {
-  console.log("'popup.js' подключен");
+  // console.log("'popup.js' подключен");
   const popup = document.querySelector(".popup");
   const triggers = document.querySelectorAll(".popup-btn");
   const popupForm = popup.querySelector("form");

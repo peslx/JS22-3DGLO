@@ -1,5 +1,5 @@
 const help = (module) => {
-  console.log("'helpers.js' вызвана из " + module);
+  // console.log("'helpers.js' вызвана из " + module);
 };
 
 const animate = ({ timing, draw, duration }) => {

@@ -1,7 +1,7 @@
 import { help, animate } from "./helpers";
 
 const calc = (price = 100) => {
-  console.log("'calc.js' подключен");
+  // console.log("'calc.js' подключен");
   const calc = document.querySelector(".calc-block");
   const calcType = document.querySelector(".calc-type");
   const calcSquare = document.querySelector(".calc-square");

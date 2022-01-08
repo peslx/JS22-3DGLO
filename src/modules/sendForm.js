@@ -1,5 +1,5 @@
 const sendForm = ({ formID, extraData = [] }) => {
-  console.log(`'sendForm.js (id:${formID})' подключен`);
+  // console.log(`'sendForm.js (id:${formID})' подключен`);
   const form = document.getElementById(formID);
 
   const statusBar = document.createElement("div");

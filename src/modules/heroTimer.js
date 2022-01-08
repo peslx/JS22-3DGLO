@@ -1,5 +1,5 @@
 const heroTimer = (deadline) => {
-  console.log("'heroTimer.js' подключен");
+  // console.log("'heroTimer.js' подключен");
 
   const timer = document.getElementById("timer");
   const timerDays = document.getElementById("timer-days");

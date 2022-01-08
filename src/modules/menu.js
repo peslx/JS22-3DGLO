@@ -1,5 +1,5 @@
 const menu = () => {
-  console.log("'menu.js' подключен");
+  // console.log("'menu.js' подключен");
 
   const menu = document.querySelector("menu");
 

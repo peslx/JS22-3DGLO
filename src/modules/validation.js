@@ -1,5 +1,5 @@
 const validation = () => {
-  console.log("'validation.js' подключен");
+  // console.log("'validation.js' подключен");
 
   const calcInputs = document
     .querySelector(".calc-block")
@@ -26,6 +26,7 @@ const validation = () => {
   };
 
   const setInvalid = (input) => {
+    input.classList.remove("validOk");
     input.classList.add("validError");
     input.style.borderBottom = "2px solid red";
     input.style.color = "red";
@@ -41,9 +42,13 @@ const validation = () => {
 
   const checkValid = (input) => {
     input.addEventListener("change", () => {
-      if (input.value && !input.classList.contains("validOk")) {
+      if (
+        input.required &&
+        input.value &&
+        !input.classList.contains("validOk")
+      ) {
         setValid(input);
-      } else {
+      } else if (input.required && input.value === "") {
         setInvalid(input);
       }
     });

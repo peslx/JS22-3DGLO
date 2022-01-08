@@ -1,5 +1,5 @@
 const tabs = () => {
-  console.log("'tabs.js' подключен");
+  // console.log("'tabs.js' подключен");
   const tabMenu = document.querySelector(".service-header");
   const tabBtns = document.querySelectorAll(".service-header-tab");
   const tabs = document.querySelectorAll(".service-tab");
