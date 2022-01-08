@@ -23,3 +23,11 @@ sendForm({
     },
   ],
 });
+
+sendForm({
+  formID: "form2",
+});
+
+sendForm({
+  formID: "form3",
+});

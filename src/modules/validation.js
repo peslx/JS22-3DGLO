@@ -17,6 +17,38 @@ const validation = () => {
     .getElementById("form3")
     .querySelectorAll("input");
 
+  const setValid = (input) => {
+    input.classList.remove("validError");
+    input.classList.add("validOk");
+    input.style.borderBottom = "2px solid green";
+    input.style.color = "green";
+    input.style.backgroundColor = "#88ff88";
+  };
+
+  const setInvalid = (input) => {
+    input.classList.add("validError");
+    input.style.borderBottom = "2px solid red";
+    input.style.color = "red";
+    input.style.backgroundColor = "#ff8888";
+  };
+
+  const checkInvalid = (input) => {
+    input.addEventListener("invalid", (e) => {
+      e.preventDefault();
+      setInvalid(input);
+    });
+  };
+
+  const checkValid = (input) => {
+    input.addEventListener("change", () => {
+      if (input.value && !input.classList.contains("validOk")) {
+        setValid(input);
+      } else {
+        setInvalid(input);
+      }
+    });
+  };
+
   const validate = {
     words: {
       cyr: (str) => str.replace(/[^а-яА-Я\- ]/g, ""),
@@ -61,8 +93,9 @@ const validation = () => {
     });
     i.addEventListener("blur", (e) => {
       validate.onBlur(i);
-      console.log("**" + e.target.value + "**");
     });
+    checkInvalid(i);
+    checkValid(i);
   });
 
   footerFormInputs.forEach((i) => {
@@ -72,6 +105,8 @@ const validation = () => {
     i.addEventListener("blur", () => {
       validate.onBlur(i);
     });
+    checkInvalid(i);
+    checkValid(i);
   });
 
   popupFormInputs.forEach((i) => {
@@ -81,6 +116,8 @@ const validation = () => {
     i.addEventListener("blur", () => {
       validate.onBlur(i);
     });
+    checkInvalid(i);
+    checkValid(i);
   });
 
   calcInputs.forEach((i) => {

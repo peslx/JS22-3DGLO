@@ -22,6 +22,11 @@ const popup = () => {
     }
   });
 
+  popupForm.addEventListener("submit", () => {
+    popup.style.display = "none";
+    hidePopup();
+  });
+
   const hidePopup = () => {
     popupForm.style.opacity = "";
     popupForm.style.transform = "";

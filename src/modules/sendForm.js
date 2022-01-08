@@ -7,9 +7,21 @@ const sendForm = ({ formID, extraData = [] }) => {
   const successTxt = "Форма успешно отправлена";
   const errorTxt = "Ошибка отправки =(";
 
+  const removeValid = (input) => {
+    input.classList.remove("validOk");
+    input.classList.remove("validOk");
+    input.style.borderBottom = "";
+    input.style.color = "";
+    input.style.backgroundColor = "";
+  };
+
   const validateForm = (inps) => {
     let res = true;
-    inps.forEach((i) => {});
+    inps.forEach((i) => {
+      if (i.classList.contains("validError")) {
+        res = false;
+      }
+    });
     return res;
   };
 
@@ -46,14 +58,19 @@ const sendForm = ({ formID, extraData = [] }) => {
     });
 
     if (validateForm(inputs)) {
-      sendData(body)
-        .then((data) => {
-          statusBar.textContent = successTxt;
-          inputs.forEach((input) => (input.value = ""));
-        })
-        .catch((error) => {
-          statusBar.textContent = errorTxt;
-        });
+      sendData(body).then((data) => {
+        statusBar.textContent = successTxt;
+        inputs
+          .forEach((input) => {
+            input.value = "";
+            removeValid(input);
+          })
+          .catch((error) => {
+            statusBar.textContent = errorTxt;
+          });
+      });
+    } else {
+      console.error("Данные не введены или неверны");
     }
   };
 
