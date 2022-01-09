@@ -58,17 +58,18 @@ const sendForm = ({ formID, extraData = [] }) => {
     });
 
     if (validateForm(inputs)) {
-      sendData(body).then((data) => {
-        statusBar.textContent = successTxt;
-        inputs
-          .forEach((input) => {
+      sendData(body)
+        .then((data) => {
+          statusBar.textContent = successTxt;
+          inputs.forEach((input) => {
             input.value = "";
             removeValid(input);
-          })
-          .catch((error) => {
-            statusBar.textContent = errorTxt;
           });
-      });
+        })
+        .catch((error) => {
+          statusBar.textContent = errorTxt;
+          console.error(error.message);
+        });
     } else {
       console.error("Данные не введены или неверны");
     }
