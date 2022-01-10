@@ -49,7 +49,7 @@ const sendForm = ({ formID, extraData = [] }) => {
     });
     extraData.forEach((item) => {
       const node = document.getElementById(item.id);
-      console.log(node);
+      // console.log(node);
       if (item.type === "block") {
         body[item.id] = node.textContent;
       } else if (item.type === "input") {

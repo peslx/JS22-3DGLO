@@ -31,13 +31,44 @@ const validation = () => {
     input.style.borderBottom = "2px solid red";
     input.style.color = "red";
     input.style.backgroundColor = "#ff8888";
+
+    const showErrorMsg = (msg) => {
+      const errorSpan = document.createElement("span");
+      errorSpan.style.position = "absolute";
+      errorSpan.style.left = "50%";
+      errorSpan.style.top = "25px";
+      errorSpan.style.color = "red";
+      errorSpan.style.fontFamily = "inherit";
+      errorSpan.style.fontSize = "12px";
+      errorSpan.style.background = "white";
+      errorSpan.style.border = "1px solid red";
+      errorSpan.style.padding = "5px";
+      errorSpan.style.borderRadius = "10px";
+      errorSpan.style.borderTopLeftRadius = "0";
+
+      errorSpan.textContent = msg;
+
+      input.closest("div").style.position = "relative";
+      input.closest("div").append(errorSpan);
+      setTimeout(() => {
+        input.closest("div").removeChild(errorSpan);
+      }, 1000);
+    };
+
+    if (input.value === "") {
+      showErrorMsg("* Обязательное поле!");
+    } else if (input.name === "user_name" && input.value.length < 2) {
+      showErrorMsg("Длина имени минимум 2 символа");
+    }
   };
 
   const checkInvalid = (input) => {
-    input.addEventListener("invalid", (e) => {
-      e.preventDefault();
-      setInvalid(input);
-    });
+    if (input.required) {
+      input.addEventListener("invalid", (e) => {
+        e.preventDefault();
+        setInvalid(input);
+      });
+    }
   };
 
   const checkValid = (input) => {
@@ -49,6 +80,8 @@ const validation = () => {
       ) {
         setValid(input);
       } else if (input.required && input.value === "") {
+        setInvalid(input);
+      } else if (input.required && input.value.length < 2) {
         setInvalid(input);
       }
     });

@@ -6,7 +6,7 @@ const heroTimer = (deadline) => {
   const timerHours = document.getElementById("timer-hours");
   const timerMinutes = document.getElementById("timer-minutes");
   const timerSeconds = document.getElementById("timer-seconds");
-
+  let timerID;
   const getTimeToDeadline = (deadline) => {
     let stopDate = new Date(deadline).getTime();
     let nowDate = new Date().getTime();
@@ -28,7 +28,7 @@ const heroTimer = (deadline) => {
     // console.log(time.remTime);
     if (time.remTime <= 0) {
       clearInterval(timerID);
-      setInterval(stopMsg, 2000);
+      setTimeout(stopMsg, 1000);
       timerDays.textContent = ``;
       timerHours.textContent = "00";
       timerMinutes.textContent = "00";
@@ -49,7 +49,7 @@ const heroTimer = (deadline) => {
     // timerSeconds.style.display = "none";
   };
   refreshTime();
-  let timerID = setInterval(refreshTime, 1000);
+  timerID = setInterval(refreshTime, 1000);
 };
 
 export default heroTimer;
