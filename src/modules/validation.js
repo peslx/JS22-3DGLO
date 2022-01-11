@@ -23,14 +23,24 @@ const validation = () => {
     input.style.borderBottom = "2px solid green";
     input.style.color = "green";
     input.style.backgroundColor = "#88ff88";
+    setTimeout(() => {
+      input.style.borderBottom = "";
+      input.style.color = "";
+      input.style.backgroundColor = "";
+    }, 1000);
   };
 
-  const setInvalid = (input) => {
+  const setInvalid = (input, msg) => {
     input.classList.remove("validOk");
     input.classList.add("validError");
     input.style.borderBottom = "2px solid red";
     input.style.color = "red";
     input.style.backgroundColor = "#ff8888";
+    // setTimeout(() => {
+    //   input.style.borderBottom = "";
+    //   input.style.color = "";
+    //   input.style.backgroundColor = "";
+    // }, 1000);
 
     const showErrorMsg = (msg) => {
       const errorSpan = document.createElement("span");
@@ -50,41 +60,63 @@ const validation = () => {
 
       input.closest("div").style.position = "relative";
       input.closest("div").append(errorSpan);
+
       setTimeout(() => {
         input.closest("div").removeChild(errorSpan);
       }, 1000);
     };
 
-    if (input.value === "") {
-      showErrorMsg("* Обязательное поле!");
-    } else if (input.name === "user_name" && input.value.length < 2) {
-      showErrorMsg("Длина имени минимум 2 символа");
-    }
+    msg ? showErrorMsg(msg) : null;
+
+    // if (input.value === "") {
+    //   showErrorMsg("* Обязательное поле!");
+    // } else if (input.name === "user_name" && input.value.length < 2) {
+    //   showErrorMsg("Длина имени минимум 2 символа");
+    // }
   };
 
   const checkInvalid = (input) => {
     if (input.required) {
       input.addEventListener("invalid", (e) => {
         e.preventDefault();
-        setInvalid(input);
+        // setInvalid(input);
+        checkValid(input);
       });
     }
   };
 
   const checkValid = (input) => {
-    input.addEventListener("change", () => {
-      if (
-        input.required &&
-        input.value &&
-        !input.classList.contains("validOk")
-      ) {
-        setValid(input);
-      } else if (input.required && input.value === "") {
-        setInvalid(input);
-      } else if (input.required && input.value.length < 2) {
-        setInvalid(input);
+    // input.addEventListener("change", () => {
+    if (input.value === "") {
+      setInvalid(input, "Обязательное поле");
+    } else {
+      if (input.name === "user_name") {
+        if (input.value.length < 2) {
+          setInvalid(input, "Минимум 2 символа");
+        } else {
+          setValid(input);
+        }
+      } else if (input.name === "user_email") {
+        if (
+          !/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/.test(
+            input.value
+          )
+        ) {
+          setInvalid(input, "Некорректный адрес");
+        } else {
+          setValid(input);
+        }
+        //
+      } else if (input.name === "user_phone") {
+        if (input.value.length < 6 || input.value.length > 12) {
+          setInvalid(input, "Укажите минимум 6 цифр ");
+        } else {
+          setValid(input);
+        }
       }
-    });
+    }
+
+    // });
   };
 
   const validate = {
@@ -102,6 +134,7 @@ const validation = () => {
         i.value = validate.mail(i.value);
       } else if (i.type == "tel") {
         i.value = validate.phone(i.value);
+        i.value = i.value.slice(0, 12);
       }
     },
     onBlur: (i) => {
@@ -126,37 +159,71 @@ const validation = () => {
   };
 
   mainFormInputs.forEach((i) => {
-    i.addEventListener("input", () => {
-      validate.input(i);
-    });
-    i.addEventListener("blur", (e) => {
-      validate.onBlur(i);
-    });
-    checkInvalid(i);
-    checkValid(i);
+    if (i.required) {
+      i.addEventListener("input", () => {
+        validate.input(i);
+        // checkValid(i);
+      });
+      i.addEventListener("change", () => {
+        validate.input(i);
+        checkValid(i);
+      });
+      i.addEventListener("blur", () => {
+        validate.onBlur(i);
+      });
+      checkInvalid(i);
+    }
   });
 
   footerFormInputs.forEach((i) => {
     i.addEventListener("input", () => {
       validate.input(i);
     });
+    i.addEventListener("change", () => {
+      validate.input(i);
+      checkValid(i);
+    });
     i.addEventListener("blur", () => {
       validate.onBlur(i);
     });
     checkInvalid(i);
-    checkValid(i);
   });
 
   popupFormInputs.forEach((i) => {
     i.addEventListener("input", () => {
       validate.input(i);
     });
+    i.addEventListener("change", () => {
+      validate.input(i);
+      checkValid(i);
+    });
     i.addEventListener("blur", () => {
       validate.onBlur(i);
     });
     checkInvalid(i);
-    checkValid(i);
   });
+
+  // footerFormInputs.forEach((i) => {
+  //   i.addEventListener("input", () => {
+  //     validate.input(i);
+  //   });
+  //   i.addEventListener("blur", () => {
+  //     validate.onBlur(i);
+  //     checkValid(i);
+  //   });
+  //   checkInvalid(i);
+  // });
+
+  // popupFormInputs.forEach((i) => {
+  //   i.addEventListener("input", () => {
+  //     validate.input(i);
+  //   });
+  //   i.addEventListener("blur", () => {
+  //     validate.onBlur(i);
+  //     checkValid(i);
+  //   });
+  //   checkInvalid(i);
+  // });
 
   calcInputs.forEach((i) => {
     i.addEventListener("input", () => {

@@ -1,4 +1,4 @@
-const sendForm = ({ formID, extraData = [] }) => {
+const sendForm = ({ formID, isPopup = false, extraData = [] }) => {
   // console.log(`'sendForm.js (id:${formID})' подключен`);
   const form = document.getElementById(formID);
 
@@ -41,12 +41,15 @@ const sendForm = ({ formID, extraData = [] }) => {
 
     const body = {};
 
-    statusBar.textContent = loadingTxt;
-    form.append(statusBar);
+    const hidePopup = () => {
+      const popup = form.closest(".popup");
+      popup.style.display = "none";
+    };
 
     formData.forEach((value, key) => {
       body[key] = value;
     });
+
     extraData.forEach((item) => {
       const node = document.getElementById(item.id);
       // console.log(node);
@@ -57,10 +60,29 @@ const sendForm = ({ formID, extraData = [] }) => {
       }
     });
 
+    statusBar.textContent = loadingTxt;
+    if (isPopup) {
+      form.parentNode.querySelector("h3").textContent = "Статус отправки формы";
+      statusBar.style.color = "silver";
+      statusBar.style.fontSize = "1.5rem";
+      form.innerHTML = "";
+      form.append(statusBar);
+    } else {
+      form.append(statusBar);
+    }
+
     if (validateForm(inputs)) {
       sendData(body)
         .then((data) => {
           statusBar.textContent = successTxt;
+          setTimeout(() => {
+            if (isPopup) {
+              hidePopup();
+              statusBar.innerHTML = `Вы уже отправили форму.<br>Для повторной отправки перезагрузите страницу.`;
+            } else {
+              statusBar.textContent = "";
+            }
+          }, 2500);
           inputs.forEach((input) => {
             input.value = "";
             removeValid(input);
@@ -68,6 +90,16 @@ const sendForm = ({ formID, extraData = [] }) => {
         })
         .catch((error) => {
           statusBar.textContent = errorTxt;
+          setTimeout(() => {
+            if (isPopup) {
+              statusBar.innerHTML =
+                "Что-то пошло не так. Попробуйте еще раз.<br>Для повторной попытки перезагрузите страницу.";
+              hidePopup();
+            } else {
+              statusBar.textContent =
+                "Что-то пошло не так. Попробуйте еще раз.<br>Для повторной попытки перезагрузите страницу.";
+            }
+          }, 2500);
           console.error(error.message);
         });
     } else {
