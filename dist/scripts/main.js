@@ -1,1 +1,0 @@
-(()=>{"use strict";console.log("'one.js' подключен"),console.log("'two.js' подключен")})();

@@ -1,5 +1,3 @@
-import moduleOne from "./modules/one";
-import moduleTwo from "./modules/two";
+import { first } from "./modules/first";
 
-moduleOne();
-moduleTwo();
+first()
