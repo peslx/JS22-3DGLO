@@ -7,13 +7,19 @@
       "children": false,
       "permissions": true
     },
-
     {
       "id": 1,
       "name": "Jacoby",
       "email": "thornton@gmail.com",
       "children": true,
       "permissions": false
+    },
+    {
+      "name": "Fake",
+      "email": "jj@zz.us",
+      "children": true,
+      "permissions": false,
+      "id": 2
     }
   ]
 }
