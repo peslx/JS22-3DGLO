@@ -2,24 +2,38 @@
   "users": [
     {
       "id": 0,
-      "name": "Mark",
-      "email": "otto@gmail.com",
+      "name": "Eugene",
+      "email": "peslx@mail.ru",
       "children": false,
       "permissions": true
     },
     {
-      "id": 1,
-      "name": "Jacoby",
-      "email": "thornton@gmail.com",
-      "children": true,
-      "permissions": false
+      "name": "Olga",
+      "email": "kraft_olia@mail.ru",
+      "children": false,
+      "permissions": false,
+      "id": 1
     },
     {
-      "name": "Fake",
-      "email": "jj@zz.us",
-      "children": true,
+      "name": "Mira",
+      "email": "mira_ples@gmail.com",
+      "children": false,
       "permissions": false,
       "id": 2
+    },
+    {
+      "name": "Clark Kent",
+      "email": "ck_super@man.com",
+      "children": false,
+      "permissions": false,
+      "id": 3
+    },
+    {
+      "name": "Jane Doe",
+      "email": "jd@xxx.com",
+      "children": false,
+      "permissions": false,
+      "id": 4
     }
   ]
 }
